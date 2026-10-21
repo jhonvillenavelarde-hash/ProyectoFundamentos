@@ -1,0 +1,1 @@
+Este proyecto es una solucion desarrollada para optimizar y agilizar la atencion de tramites en la Municipalidad de ATE.Su objetivo principal es reducir los tiempos de espera en los ciudadanos,automatizar el flujo de papeleos y evitar la perdida de informacion que suele ocurrir con los procesos manuales.
