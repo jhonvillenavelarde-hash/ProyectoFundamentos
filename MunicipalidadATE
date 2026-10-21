@@ -1,0 +1,109 @@
+def registrar(codigos, nombres, dnis, asuntos):
+    print("--- REGISTRAR EXPEDIENTE ---")
+    nombre = input("Nombre del ciudadano: ")
+    dni = input("DNI (8 digitos): ")
+    asunto = input("Asunto del tramite: ")
+    
+    if len(nombre) == 0:
+        print("Error: el nombre es obligatorio.")
+    elif len(dni) != 8:
+        print("Error: el DNI debe tener 8 digitos.")
+    elif len(asunto) < 5:
+        print("Error: el asunto debe tener al menos 5 caracteres.")
+    else:
+        # En Python, los arreglos empiezan en 0, usamos len para la cantidad actual
+        cantidad = len(codigos) + 1
+        codigo = f"EXP-{cantidad}"
+        
+        codigos.append(codigo)
+        nombres.append(nombre)
+        dnis.append(dni)
+        asuntos.append(asunto)
+        
+        print(f"Expediente registrado: {codigo}")
+
+def buscar(codigos, nombres, dnis, asuntos):
+    codigo_buscado = input("Codigo que desea buscar: ")
+    encontrado = False
+    
+    for i in range(len(codigos)):
+        if codigos[i] == codigo_buscado:
+            print("Expediente encontrado:")
+            print(f"Codigo: {codigos[i]}")
+            print(f"Nombre: {nombres[i]}")
+            print(f"DNI: {dnis[i]}")
+            print(f"Asunto: {asuntos[i]}")
+            encontrado = True
+            
+    if not encontrado:
+        print("No se encontro el expediente.")
+
+def ordenar(codigos, nombres, dnis, asuntos):
+    n = len(codigos)
+    # Método de burbuja para ordenar en paralelo
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if codigos[j] > codigos[j + 1]:
+                # Intercambiar códigos
+                codigos[j], codigos[j + 1] = codigos[j + 1], codigos[j]
+                # Intercambiar nombres
+                nombres[j], nombres[j + 1] = nombres[j + 1], nombres[j]
+                # Intercambiar DNIs
+                dnis[j], dnis[j + 1] = dnis[j + 1], dnis[j]
+                # Intercambiar asuntos
+                asuntos[j], asuntos[j + 1] = asuntos[j + 1], asuntos[j]
+                
+    print("Expedientes ordenados por codigo.")
+
+def mostrar_expedientes(codigos, nombres, dnis, asuntos):
+    if len(codigos) == 0:
+        print("No hay expedientes registrados.")
+    else:
+        print("--- LISTA DE EXPEDIENTES ---")
+        for i in range(len(codigos)):
+            print(f"Codigo: {codigos[i]}")
+            print(f"Nombre: {nombres[i]}")
+            print(f"DNI: {dnis[i]}")
+            print(f"Asunto: {asuntos[i]}")
+            print("------------------------")
+
+def main():
+    codigos = []
+    nombres = []
+    dnis = []
+    asuntos = []
+    
+    opcion = -1
+    while opcion != 0:
+        print("\n=== MESA DE PARTES DIGITAL ===")
+        print("1. Registrar expediente")
+        print("2. Buscar expediente")
+        print("3. Ordenar expedientes")
+        print("4. Mostrar expedientes")
+        print("0. Salir")
+        
+        try:
+            opcion = int(input("Seleccione una opcion: "))
+        except ValueError:
+            print("Por favor, ingrese un número válido.")
+            continue
+            
+        if opcion == 1:
+            if len(codigos) < 100:
+                registrar(codigos, nombres, dnis, asuntos)
+            else:
+                print("No se pueden registrar mas expedientes.")
+        elif opcion == 2:
+            buscar(codigos, nombres, dnis, asuntos)
+        elif opcion == 3:
+            ordenar(codigos, nombres, dnis, asuntos)
+        elif opcion == 4:
+            mostrar_expedientes(codigos, nombres, dnis, asuntos)
+        elif opcion == 0:
+            print("Programa finalizado.")
+        else:
+            print("Opcion no valida.")
+
+# Ejecutar el programa principal
+if __name__ == "__main__":
+    main()
